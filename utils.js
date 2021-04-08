@@ -3,24 +3,12 @@ const axios = require('axios');
 module.exports.createInstance = (host) => {
   const instance = axios.create({
     baseURL: host,
-    proxy: {
+    proxy: process.env.NODE_ENV === 'development' ? {
       host: '127.0.0.1',
       port: 8888
-    }
+    } : undefined,
   });
 
-  instance.interceptors.response.use(
-    res => {
-      const {
-        data,
-        status
-      } = res;
-      return data;
-    },
-    error => {
-      return Promise.reject(error);
-    }
-  );
   return instance;
 }
 

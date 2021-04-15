@@ -24,11 +24,11 @@ module.exports.createInstance = (host) => {
   return instance;
 }
 
-module.exports.randomString = () => {
-  e = 10;
-  var t = "ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678";
-  a = t.length;
-  n = "";
+module.exports.randomString = (num) => {
+  let e = num || 10;
+  let t = "ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678";
+  let a = t.length;
+  let n = "";
   for (i = 0; i < e; i++) n += t.charAt(Math.floor(Math.random() * a));
   return n
 }

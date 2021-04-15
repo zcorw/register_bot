@@ -1,6 +1,19 @@
 const { createInstance, randomString } = require('../utils');
 const instance = createInstance(process.env.VIDEO_HOST);
 
+instance.interceptors.response.use(
+  res => {
+    const {
+      data,
+      status
+    } = res;
+    return data;
+  },
+  error => {
+    return Promise.reject(new Error(error.response.data));
+  }
+);
+
 const info = 'X-Emby-Client=Emby%20Web&X-Emby-Device-Name=Chrome&X-Emby-Client-Version=4.5.4.0&X-Emby-Device-Id=f53ae843-50d9-484d-ad20-0a892d329962';
 
 function login(username, password) {
